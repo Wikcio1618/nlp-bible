@@ -1,6 +1,7 @@
 from collections import Counter
 import pandas as pd
 
+# author -- annagiszczak
 
 def compute_author_ngram_frequencies(df: pd.DataFrame, n: int = 2) -> dict:
     freqs = {}  # dane dla każdego autora

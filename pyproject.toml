@@ -1,13 +1,12 @@
 [tool.poetry]
-name = "text-project"
+name = "nlp-bible"
 version = "1"
-description = "Fajny projekcik"
-authors = ["Wiktor Ciołek and Anna Giszczak"]
+description = "NLP employed in Bible studies"
+authors = ["Wikcio1618"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-kagglehub = "^0.3.7"
 jupyter = "^1.1.1"
 numpy = "^2.2.2"
 seaborn = "^0.13.2"
