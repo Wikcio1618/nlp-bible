@@ -3,10 +3,13 @@ import pandas as pd
 
 # author -- annagiszczak
 
-def compute_author_ngram_frequencies(df: pd.DataFrame, n: int = 2) -> dict:
+def compute_ngram_frequencies(df: pd.DataFrame, querry:str, n: int = 2) -> dict:
+    if querry not in df.columns:
+        raise AttributeError(f"querry should be one of columns which are: {df.columns}")
+
     freqs = {}  # dane dla każdego autora
 
-    for author, group in df.groupby("author", sort=False):
+    for author, group in df.groupby(querry, sort=False):
         words = group["lemma"].tolist()
         ngrams = [" ".join(words[i:i+n]) for i in range(len(words) - n + 1)]
         author_ngram_counts = Counter(ngrams)
@@ -41,14 +44,14 @@ def cng_distance(freq_x: dict, freq_y: dict, L: int = 1000) -> float:
     return distance
 
 def calculate_distances(freqs):
-    authors = list(freqs.keys())
+    doc = list(freqs.keys())
     distances = {}
     L_chosen = 200
 
-    for i in range(len(authors)):
-        for j in range(i+1, len(authors)):
-            a1 = authors[i]
-            a2 = authors[j]
+    for i in range(len(doc)):
+        for j in range(i+1, len(doc)):
+            a1 = doc[i]
+            a2 = doc[j]
             dist = cng_distance(freqs[a1], freqs[a2], L=L_chosen)
             distances[(a1, a2)] = dist
     return distances
